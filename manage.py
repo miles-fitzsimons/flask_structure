@@ -6,7 +6,7 @@ from flask_script import Manager
 
 from app import blueprint
 from app.main import create_app, db
-from app.main.model import blacklist, user
+# from app.main.model import blacklist, user
 
 app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
 app.register_blueprint(blueprint)
@@ -36,3 +36,9 @@ def test():
 
 if __name__ == '__main__':
     manager.run()
+
+# TODO
+# Makefile. See tutorial
+# Add a page that requires a user to be authenticated to use
+# Each user can have a list of wines they can view, and can also view individual wines # noqa E501
+# Users can add wines
