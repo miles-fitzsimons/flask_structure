@@ -16,16 +16,20 @@ class DevelopmentConfig(Config):
     # uncomment the line below to use postgres
     # SQLALCHEMY_DATABASE_URI = postgres_local_base
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@localhost:5432/flaskstructure'
+    SQLALCHEMY_DATABASE_URI = (
+        'postgresql://postgres:password@localhost:5432/flaskstructure')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestingConfig(Config):
     DEBUG = True
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
-        os.path.join(
-            basedir, 'flask_boilerplate_test.db')  # MILES This will break
+    SQLALCHEMY_DATABASE_URI = (
+        'postgresql://postgres:password@localhost:5432/flaskstructuretest')
+
+    # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
+    #     os.path.join(
+    #         basedir, 'flask_boilerplate_test.db')  # MILES This will break
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
