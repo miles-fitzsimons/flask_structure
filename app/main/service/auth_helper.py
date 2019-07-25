@@ -12,11 +12,15 @@ class Auth:
             if user and user.check_password(data.get('password')):
                 auth_token = User.encode_auth_token(user.id)
                 if auth_token:
+                    print("XXXX", user.public_id)
                     response_object = {
                         'status': 'success',
                         'message': 'Successfully logged in.',
-                        'Authorization': auth_token.decode()
+                        'authorization': auth_token.decode(),
+                        'userId': user.public_id
                     }
+                    # session['api_session_token'] = auth_token.decode()
+                    # session['user_id'] = user.public_id
                     return response_object, 200
             else:
                 response_object = {
@@ -63,7 +67,6 @@ class Auth:
         if auth_token:
             resp = User.decode_auth_token(auth_token)
             if not isinstance(resp, str):
-                print("RESP", resp)
                 user = User.query.filter_by(id=resp).first()
                 response_object = {
                     'status': 'success',
@@ -81,7 +84,7 @@ class Auth:
             }
             return response_object, 401
         else:
-            response_object: {
+            response_object = {
                 'status': 'fail',
                 'message': 'Provide a valid auth token.'
             }

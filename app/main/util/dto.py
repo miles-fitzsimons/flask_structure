@@ -19,7 +19,19 @@ class AuthDto:
     user_auth = api.model('auth_details', {
         'email': fields.String(required=True, description='The email address'),
         'password': fields.String(
-            requires=True,
+            required=True,
             description='The user password'
         )
+    })
+
+
+class WineDto:
+    api = Namespace('wine', description='wine related operations')
+    wine = api.model('wine', {
+        'public_id': fields.String(description='wine identifier'),
+        'brand': fields.String(required=True, description='the wine brand'),
+        'variety': fields.String(required=True,
+                                 description='the wine variety'),
+        'year': fields.Integer(required=True,
+                               description='the year the wine was made')
     })

@@ -40,7 +40,6 @@ def save_changes(data):
 
 def generate_token(user):
     try:
-        print("YYUUUPPP user.id", user.id)
         auth_token = user.encode_auth_token(user.id)
         response_object = {
             'status': 'success',

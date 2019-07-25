@@ -3,6 +3,7 @@ from flask_restplus import Resource
 
 from app.main.service.auth_helper import Auth
 from ..util.dto import AuthDto
+from app.main.util.decorator import token_required
 
 api = AuthDto.api
 user_auth = AuthDto.user_auth
@@ -17,6 +18,7 @@ class UserLogin(Resource):
         return Auth.login_user(data=post_data)
 
 
+@token_required
 @api.route('/logout')
 class LogoutAPI(Resource):
     @api.doc('logout a user')
