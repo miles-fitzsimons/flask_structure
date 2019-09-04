@@ -17,6 +17,7 @@ class Auth:
                         'authorization': auth_token.decode(),
                         'userId': user.public_id
                     }
+
                     return response_object, 200
             else:
                 response_object = {

@@ -10,15 +10,13 @@ api = WineDto.api
 _wine = WineDto.wine
 
 
-@api.route('/')
+@api.route('/add')
 class WineList(Resource):
-    # MILES token_required
+    @token_required
     @api.response(201, 'Wine successfully created.')
     @api.doc('create a new wine')
     @api.expect(_wine)
     def post(self):
-        # get user
-        # data, status = Auth.get_logged_in_user(request)
         data = request.json
         return save_new_wine(data=data)
 
