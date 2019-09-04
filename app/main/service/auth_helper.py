@@ -7,20 +7,16 @@ class Auth:
     @staticmethod
     def login_user(data):
         try:
-            # fetch the user data
             user = User.query.filter_by(email=data.get('email')).first()
             if user and user.check_password(data.get('password')):
                 auth_token = User.encode_auth_token(user.id)
                 if auth_token:
-                    print("XXXX", user.public_id)
                     response_object = {
                         'status': 'success',
                         'message': 'Successfully logged in.',
                         'authorization': auth_token.decode(),
                         'userId': user.public_id
                     }
-                    # session['api_session_token'] = auth_token.decode()
-                    # session['user_id'] = user.public_id
                     return response_object, 200
             else:
                 response_object = {
@@ -46,7 +42,6 @@ class Auth:
         if auth_token:
             resp = User.decode_auth_token(auth_token)
             if not isinstance(resp, str):
-                # mark the token as blacklisted
                 return save_token(token=auth_token)
             else:
                 response_object = {
